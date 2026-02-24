@@ -56,6 +56,10 @@
             cursor: pointer;
             color: #4e73df;
         }
+
+        #emailField {
+            display: none;
+        }
     </style>
 </head>
 <body>
@@ -64,6 +68,10 @@
     <h2 id="formTitle">Log In</h2>
 
     <form id="authForm">
+        <div id="emailField">
+            <input type="email" placeholder="Email">
+        </div>
+
         <input type="text" placeholder="Username" required>
         <input type="password" placeholder="Password" required>
         <button type="submit">Log In</button>
@@ -79,15 +87,21 @@
         const title = document.getElementById("formTitle");
         const button = document.querySelector("button");
         const switchText = document.querySelector(".switch");
+        const emailField = document.getElementById("emailField");
+        const emailInput = emailField.querySelector("input");
 
         if (title.innerText === "Log In") {
-            title.innerText = "Sign Up";
+            title.innerText = "Sign Up"; 
             button.innerText = "Sign Up";
             switchText.innerText = "Имаш акаунт? Log In";
+            emailField.style.display = "block";
+            emailInput.required = true;
         } else {
             title.innerText = "Log In";
             button.innerText = "Log In";
             switchText.innerText = "Нямаш акаунт? Sign Up";
+            emailField.style.display = "none";
+            emailInput.required = false;
         }
     }
 </script>
