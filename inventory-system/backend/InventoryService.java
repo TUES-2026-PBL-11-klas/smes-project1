@@ -3,6 +3,7 @@ package backend;
 import backend.model.Product;
 import java.util.ArrayList;
 import java.util.List;
+import java.sql.*;
 
 public class InventoryService {
     private List<Product> inventory = new ArrayList<>();
