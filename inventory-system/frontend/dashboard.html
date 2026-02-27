@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="bg">
+<html lang="bg"> 
 <head>
     <meta charset="UTF-8">
     <title>Табло за управление - Склад</title>
@@ -28,7 +28,6 @@
             color: #333;
         }
 
-
         table {
             width: 100%;
             border-collapse: collapse;
@@ -56,7 +55,6 @@
             padding: 20px;
         }
 
-
         .button-group {
             display: flex;
             justify-content: center;
@@ -75,20 +73,25 @@
             transition: 0.3s;
         }
 
-        .btn-pdf {
-            background-color: #e74a3b; 
+        .btn-add {
+            background-color: #1cc88a;
         }
 
-        .btn-pdf:hover {
-            background-color: #be2617;
+        .btn-add:hover {
+            background-color: #17a673;
         }
 
-        .btn-csv {
-            background-color: #36b9cc;
+        .form-container {
+            display: none;
+            margin-top: 20px;
         }
 
-        .btn-csv:hover {
-            background-color: #2c9faf;
+        .form-container input, .form-container textarea {
+            width: 100%;
+            padding: 8px;
+            margin: 8px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
         }
     </style>
 </head>
@@ -100,22 +103,70 @@
     <table>
         <thead>
             <tr>
-                <th>ID</th>
                 <th>Име на продукт</th>
                 <th>Цена</th>
-                <th>Количество</th>
+                <th>Налични бройки</th>
+                <th>Обяснение</th>
             </tr>
         </thead>
-        <tbody>
-            </tbody>
+        <tbody id="productTable">
+        </tbody>
     </table>
-    <div class="empty-message">Няма налични данни в момента...</div>
+
+    <div class="empty-message" id="emptyMessage">
+        Няма налични данни в момента...
+    </div>
 
     <div class="button-group">
-        <button class="btn-pdf">Изтегли PDF справка</button>
-        <button class="btn-csv">Изтегли CSV справка</button>
+        <button class="btn-add" onclick="toggleForm()">Добави продукт</button>
     </div>
+
+    <div class="form-container" id="productForm">
+        <input type="text" id="name" placeholder="Име на продукт" required>
+        <input type="number" id="price" placeholder="Цена" required>
+        <input type="number" id="quantity" placeholder="Налични бройки" required>
+        <textarea id="description" placeholder="Обяснение" required></textarea>
+        <button class="btn-add" onclick="addProduct()">Запази</button>
+    </div>
+
 </div>
+
+<script>
+function toggleForm() {
+    const form = document.getElementById("productForm");
+    form.style.display = form.style.display === "none" ? "block" : "none";
+}
+
+function addProduct() {
+    const name = document.getElementById("name").value;
+    const price = document.getElementById("price").value;
+    const quantity = document.getElementById("quantity").value;
+    const description = document.getElementById("description").value;
+
+    if (name === "" || price === "" || quantity === "" || description === "") {
+        alert("Моля попълнете всички полета!");
+        return;
+    }
+
+    const table = document.getElementById("productTable");
+    const emptyMessage = document.getElementById("emptyMessage");
+
+    const row = table.insertRow();
+    row.insertCell(0).innerText = name;
+    row.insertCell(1).innerText = price + " €";
+    row.insertCell(2).innerText = quantity + " бр.";
+    row.insertCell(3).innerText = description;
+
+    emptyMessage.style.display = "none";
+
+    document.getElementById("name").value = "";
+    document.getElementById("price").value = "";
+    document.getElementById("quantity").value = "";
+    document.getElementById("description").value = "";
+
+    document.getElementById("productForm").style.display = "none";
+}
+</script>
 
 </body>
 </html>
