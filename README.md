@@ -1,6 +1,7 @@
 # smes-project1
 # Item Storage Application
 
+
 A simple application for storing and managing items. Built with **Spring Boot**, **MySQL**, and **Docker**.
 
 ---
