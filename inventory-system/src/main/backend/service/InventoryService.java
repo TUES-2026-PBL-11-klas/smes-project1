@@ -1,4 +1,4 @@
-package backend.service;
+package backend;
 
 import backend.model.Product;
 import java.util.ArrayList;
